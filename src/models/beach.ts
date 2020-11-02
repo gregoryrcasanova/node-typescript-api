@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema } from 'mongoose'
+import mongoose, { Document, Model, Schema } from 'mongoose';
 
 export enum BeachPosition {
   S = 'S',
@@ -8,12 +8,12 @@ export enum BeachPosition {
 }
 
 export interface Beach {
-  _id?: string
-  name: string
-  position: BeachPosition
-  lat: number
-  lng: number
-  user: string
+  _id?: string;
+  name: string;
+  position: BeachPosition;
+  lat: number;
+  lng: number;
+  user: string;
 }
 
 const schema = new mongoose.Schema(
@@ -27,13 +27,13 @@ const schema = new mongoose.Schema(
   {
     toJSON: {
       transform: (_, ret): void => {
-        ret.id = ret._id
-        delete ret._id
-        delete ret.__v
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
       },
     },
   }
-)
+);
 
 interface BeachModel extends Omit<Beach, '_id'>, Document {}
-export const Beach: Model<BeachModel> = mongoose.model('Beach', schema)
+export const Beach: Model<BeachModel> = mongoose.model('Beach', schema);
