@@ -1,3 +1,6 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
 name: Complete Workflow
 
 on: ['push']
@@ -30,3 +33,16 @@ jobs:
 
     - name: Run all tests
       run: yarn test
+
+    - shell: bash
+      if: github.ref == 'refs/heads/master'
+      name: Create SSH deployment key
+      env:
+        SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: ./scripts/deploy.sh
+
+    - name: Deployment
+      if: github.ref == 'refs/heads/master'
+      run: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/ep90rq9k/grc-surf-forecast-com.git && git push umbler master
+      env:
+        CI: true
