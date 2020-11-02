@@ -1,0 +1,17 @@
+{
+  "App": {
+    "port": "APP_PORT",
+    "database": {
+      "mongoUrl": "MONGODB_URL"
+    },
+    "resources": {
+      "stormGlass": {
+        "apiURL": "STORM_GLASS_API_URL",
+        "apiToken": "STORM_GLASS_API_TOLEN"
+      }
+    },
+    "auth": {
+      "key": "JWT_SECRET_KEY"
+    }
+  }
+}
